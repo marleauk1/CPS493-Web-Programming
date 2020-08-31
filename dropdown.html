@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0px;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0px;
+      padding: 0px;
+      height: 32px;
+      overflow: hidden;
+      background-color: purple;
+    }
+
+    li {
+      float: left;
+      height: inherit;
+      width: 128px;
+      border-right: 2px solid orange
+    }
+
+    .dropbtn {
+      display: inline-block;
+      height: inherit;
+      color: white;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 20px;
+      padding: 0px 14px;
+      text-decoration: none;
+    }
+
+    .dropdown {
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: purple;
+      width: inherit;
+      padding: 0px;
+      z-index: 1;
+    }
+
+    .dropdown-content a, span {
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <ul>
+      <li class="dropdown">
+        <span class="dropbtn"> File </span>
+        <div class="dropdown-content">
+          <a href="#"> Open </a>
+          <a href="#"> Save </a>
+          <a href="#"> Print </a>
+          <a href="#"> Exit </a>
+        </div>
+      </li>
+
+      <li class="dropdown">
+        <span class="dropbtn"> Edit </span>
+        <div class="dropdown-content">
+          <a href="#"> Copy </a>
+          <a href="#"> Cut </a>
+          <a href="#"> Paste </a>
+          <span> <hr> </span>
+          <a href="#"> Format </a>
+        </div>
+      </li>
+
+      <li class="dropdown">
+        <span class="dropbtn"> Help </span>
+        <div class="dropdown-content">
+          <a href="#"> About </a>
+        </div>
+      </li>
+    </ul>
+  </header>
+
+</body>
+
+</html>
