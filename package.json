@@ -1,0 +1,10 @@
+{
+  "name": "cps493-web-programming",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marleauk1/CPS493-Web-Programming.git"
+  },
+  "license": "ISC"
+}
