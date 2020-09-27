@@ -1,7 +1,8 @@
 {
   "name": "cps493-web-programming",
   "scripts": {
-    "start": "nodemon --watch server server/index.js"
+    "dev": "nodemon --watch server server/index.js",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -9,9 +10,10 @@
   },
   "license": "ISC",
   "dependencies": {
-    "express": "4.17.1"
+    "express": "^4.17.1",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
-    "nodemon": "2.0.4"
+    "nodemon": "^2.0.4"
   }
 }
