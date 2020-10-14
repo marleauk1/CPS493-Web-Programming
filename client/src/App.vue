@@ -1,16 +1,18 @@
 <template>
   <div>
     <Nav />
+    <Notifications />
     <router-view/>
   </div>
 </template>
 
 <script>
 import Nav from "@/components/Nav"
+import Notifications from "@/components/Notifications"
 
 export default {
   components: {
-    Nav
+    Nav, Notifications
   }
 }
 </script>

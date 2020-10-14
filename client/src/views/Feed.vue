@@ -1,12 +1,12 @@
 <template>
-  <div class="page">
+  <div class="page mt-3">
       <h2 class="title is-2">Feed Page</h2>
     <div class="columns">
       <div class="column is-two-thirds">
-          <h3 class="title is-3">Main Feed</h3>
           <Post class="mb-5" 
                 v-for="(x, i) in posts" 
                 :key="i"
+                :i="i"
                 :post="x" />
       </div>
       <div class="column is-one-third">
@@ -30,6 +30,11 @@ export default {
     components: {
         Post,
         Sidebar
+    },
+    methods: {
+      error(){
+        session.addNotification("Something went wrong", "danger")
+      }
     }
 };
 </script>

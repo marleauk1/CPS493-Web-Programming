@@ -21,14 +21,29 @@
     </div>
     <div class="field">
       <p class="control">
-        <button class="button is-success">Login</button>
+        <button class="button is-success" @click.prevent="login">Login</button>
       </p>
     </div>
   </form>
 </template>
 
 <script>
-export default {};
+import session from "@/models/session";
+
+export default {
+  methods: {
+    login() {
+      session.user = {
+        name: "User Name",
+        handle: "userhandle",
+        profilepic:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Chelidonura_varians.jpg/220px-Chelidonura_varians.jpg",
+      };
+      session.addNotification("You have logged in.", "success")
+      this.$router.push("Feed");
+    },
+  },
+};
 </script>
 
 <style>

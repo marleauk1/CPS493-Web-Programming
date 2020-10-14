@@ -8,7 +8,7 @@
       </figure>
     </div>
     <div class="card-content">
-      <div class="media">
+      <div class="media my-1">
         <div class="media-left">
           <figure class="image is-48x48">
             <img
@@ -26,7 +26,7 @@
       <div class="content">
         {{post.message}}
         <br />
-        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        <time datetime="2016-1-1">11:09 PM - {{i}}</time>
       </div>
     </div>
   </div>
@@ -35,10 +35,15 @@
 <script>
 export default {
     props: {
-        post: Object
+        post: Object,
+        i: Number
     }
 };
 </script>
 
 <style>
+    time {
+        font-size: smaller;
+        font-style: italic;
+    }
 </style>
