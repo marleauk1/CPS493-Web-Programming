@@ -1,10 +1,8 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <Nav />
-      <router-view/>
-    </div>
-  </section>
+  <div>
+    <Nav />
+    <router-view/>
+  </div>
 </template>
 
 <script>
