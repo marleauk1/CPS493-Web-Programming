@@ -1,4 +1,5 @@
 const mysql = require('./mysql');
+const Types = { ADMIN: 5, USER: 6 };
 
 const data = [{ name: 'Moshe', age: 43}, { name: 'Joe', age: 78 }]
 
@@ -39,4 +40,4 @@ async function remove(id){
     return await mysql.query(sql, [id]);
 }
 
-module.exports = { getAll, get, getTypes, search, add, update, remove }
+module.exports = { Types, getAll, get, getTypes, search, add, update, remove }
