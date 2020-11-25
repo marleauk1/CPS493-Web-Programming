@@ -10,12 +10,14 @@ console.log(process.env.BEST_CLASS);
 
 app.use(express.json());
 
+/*
 app.use(function (req, res, next) {
   const arr = (req.headers.authorization || "").split(" ");
   if (arr.length > 1 && arr[1] != null) {
     req.userId = +arr[1];
   }
 });
+*/
 
 app.get('/', (req, res) => {
   res.send('Hello World! You requested ' + req.url)

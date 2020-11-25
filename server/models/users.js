@@ -1,4 +1,5 @@
 const mysql = require('./mysql');
+const cm = require('./ContactMethods');
 const Types = { ADMIN: 5, USER: 6 };
 
 async function getAll(){
@@ -11,7 +12,7 @@ async function getAll(){
 async function get(id){
     const rows = await mysql.query(`SELECT * FROM Users WHERE id=?`, [id]);
     if(!rows.length) throw { status: 404, message: "User not found" }
-    return rows;
+    return rows[0];
 }
 
 async function getTypes(){
@@ -38,4 +39,15 @@ async function remove(id){
     return await mysql.query(sql, [id]);
 }
 
-module.exports = { Types, getAll, get, getTypes, search, add, update, remove }
+async function register(FirstName, LastName, DOB, Password, User_Type, email) {
+    if(await cm.exists(email)){
+        throw { status: 409, message: "An account already exists with this email. Please go to log in." }
+    }
+    const res = await add(FirstName, LastName, DOB, Password, User_Type);
+    const emailRes = await cm.add(cm.Types.EMAIL, email, true, true, res.insertId);
+    const user = await get(res.insertId);
+    user.primaryEmail = email;
+    return user;
+}
+
+module.exports = { Types, getAll, get, getTypes, search, add, update, remove, register }

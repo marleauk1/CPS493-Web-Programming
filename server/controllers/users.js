@@ -54,5 +54,16 @@ router
         .then(msg => { res.send( msg ); })
         .catch(next);
     })
-
+    .post('/register', (req, res, next) => {
+        users.register(
+            req.body.FirstName, 
+            req.body.LastName,
+            req.body.DOB,
+            req.body.Password,
+            users.Types.USER,
+            req.body.Email,
+        )
+        .then(newUser => { res.send( newUser ); })
+        .catch(next);
+    })
 module.exports = router;

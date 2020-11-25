@@ -9,7 +9,12 @@ async function getAll(){
 async function get(id){
     const rows = await mysql.query(`SELECT * FROM ContactMethods WHERE id=?`, [id]);
     if(!rows.length) throw { status: 404, message: "User not found" }
-    return rows;
+    return rows[0];
+}
+
+async function exists(email){
+    const rows = await mysql.query(`SELECT * FROM ContactMethods WHERE Value=?`, [email]);
+    return rows.length;
 }
 
 async function getTypes(){
@@ -36,4 +41,4 @@ async function remove(id){
     return await mysql.query(sql, [id]);
 }
 
-module.exports = { Types, getAll, get, getTypes, search, add, update, remove }
+module.exports = { Types, getAll, get, exists, getTypes, search, add, update, remove }
