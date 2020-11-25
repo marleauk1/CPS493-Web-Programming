@@ -1,8 +1,6 @@
 const mysql = require('./mysql');
 const Types = { ADMIN: 5, USER: 6 };
 
-const data = [{ name: 'Moshe', age: 43}, { name: 'Joe', age: 78 }]
-
 async function getAll(){
     // throw { status: 501, message: "This is a fake error" }
     // await Promise.resolve()
@@ -31,7 +29,7 @@ async function add(FirstName, LastName, DOB, Password, User_Type){
 
 async function update(id, FirstName, LastName, DOB, Password, User_Type){
     const sql = 'UPDATE `Users` SET ? WHERE `id` = ?; '; 
-    const params = { created_at: new Date(), FirstName, LastName, DOB: new Date(DOB), Password, User_Type };
+    const params = { FirstName, LastName, DOB: new Date(DOB), Password, User_Type };
     return await mysql.query(sql, [params, id]);
 }
 
