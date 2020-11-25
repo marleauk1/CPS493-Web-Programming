@@ -10,7 +10,11 @@ async function getAll(){
 }
 
 async function get(id){
-    const rows = await mysql.query(`SELECT * FROM Users WHERE id=?`, [id]);
+    const sql = `SELECT
+        *,
+        (SELECT Value FROM ContactMethods WHERE User_id = Users.id AND Type='${cm.Types.EMAIL}' AND IsPrimary = true) as PrimaryEmail
+        FROM Users WHERE id=?`;
+    const rows = await mysql.query(sql, [id]);
     if(!rows.length) throw { status: 404, message: "User not found" }
     return rows[0];
 }
@@ -46,7 +50,6 @@ async function register(FirstName, LastName, DOB, Password, User_Type, email) {
     const res = await add(FirstName, LastName, DOB, Password, User_Type);
     const emailRes = await cm.add(cm.Types.EMAIL, email, true, true, res.insertId);
     const user = await get(res.insertId);
-    user.primaryEmail = email;
     return user;
 }
 
