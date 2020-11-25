@@ -1,5 +1,8 @@
+const bcrypt = require('bcrypt');
 const mysql = require('./mysql');
 const cm = require('./ContactMethods');
+
+const SALT_ROUNDS = process.env.SALT_ROUNDS || 8;
 const Types = { ADMIN: 5, USER: 6 };
 
 async function getAll(){
@@ -47,10 +50,20 @@ async function register(FirstName, LastName, DOB, Password, User_Type, email) {
     if(await cm.exists(email)){
         throw { status: 409, message: "An account already exists with this email. Please go to log in." }
     }
+    const hash = await bcrypt.hash(Password, SALT_ROUNDS);
     const res = await add(FirstName, LastName, DOB, Password, User_Type);
     const emailRes = await cm.add(cm.Types.EMAIL, email, true, true, res.insertId);
     const user = await get(res.insertId);
     return user;
 }
 
-module.exports = { Types, getAll, get, getTypes, search, add, update, remove, register }
+async function login(email, password){
+    const sql = `SELECT *
+        FROM Users U Join ContactMethods CM ON U.id=CM.User_id WHERE CM.Value=?`;
+    const rows = await mysql.query(sql, [email]);
+    if(!rows.length) throw { status: 404, message: "This email address is not registered with us." }
+    if(! await bcrypt.compare(password, rows[0].Password)) throw { status: 403, message: "Wrong password." }
+    return get(rows[0].User_id);
+}
+
+module.exports = { Types, getAll, get, getTypes, search, add, update, remove, register, login }

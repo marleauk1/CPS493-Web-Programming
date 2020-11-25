@@ -67,4 +67,13 @@ router
             res.send( { ...newUser, Password: undefined } ); })
         .catch(next);
     })
+    .post('/login', (req, res, next) => {
+        users.login(
+            req.body.Email,
+            req.body.Password
+        )
+        .then(newUser => { 
+            res.send( { ...newUser, Password: undefined } ); })
+        .catch(next);
+    })
 module.exports = router;
