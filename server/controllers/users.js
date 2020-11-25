@@ -27,10 +27,32 @@ router
         .catch(next);
     })
     .post('/', (req, res, next) => {
-        const newUser = users.add( req.query.name, req.query.age )
+        users.add(
+            req.body.FirstName, 
+            req.body.LastName,
+            req.body.DOB,
+            req.body.Password,
+            6,  /* User */
+        )
         .then(newUser => { res.send( newUser ); })
         .catch(next);
-        res.send( newUser );
+    })
+    .put('/:id', (req, res, next) => {
+        users.update( 
+            req.params.id,
+            req.body.FirstName, 
+            req.body.LastName,
+            req.body.DOB,
+            req.body.Password,
+            6,  /* User */
+        )
+        .then(newUser => { res.send( newUser ); })
+        .catch(next);
+    })
+    .delete('/:id', (req, res, next) => {
+        users.remove( req.params.id )
+        .then(msg => { res.send( msg ); })
+        .catch(next);
     })
 
 module.exports = router;
